@@ -1,0 +1,42 @@
+version: '3.7'
+
+networks:
+  kong-net:
+    name: kong-net
+    driver: bridge
+
+services:
+  main:
+    container_name: 'api-movie'
+    build: '.'
+    volumes:
+      - '.:/main:rw'
+      - '/main/node_modules'
+    environment:
+      MONGO_URI: process.env.USER_BD
+    networks:
+       - kong-net
+    ports:
+      - '4000:4000'
+
+
+
+# version: "3.7"
+
+# networks:
+#   kong-net:
+#     name: kong-net
+#     driver: bridge
+   
+
+# services:
+
+#   servicea:
+#     image: wesleywillians/kong-service:latest
+#     environment:
+#       PORT: ":8081"
+#       CONTENT: "<h1>Service A</h1>"
+#     networks:
+#       - kong-net
+#     ports:
+#       - 8081:8081
