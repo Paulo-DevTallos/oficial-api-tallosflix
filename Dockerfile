@@ -1,11 +1,11 @@
 FROM node:16.13.0-alpine
 
-WORKDIR /main
+RUN npm install -g @nestjs/cli@9.0.0
 
-COPY ["package.json", "package-lock.json", "./"]
+WORKDIR /usr/api-tallosflix/main
+
+COPY package*.json .
 
 RUN npm install --silent
 
-COPY . .
-
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "start:dev"]
